@@ -1,17 +1,4 @@
-// import { mapInit } from './js/ymaps';
-import render from './templates/friends.hbs';
+import { mapInit } from './js/ymaps';
 
-// window.onload = mapInit();
+window.onload = mapInit();
 
-const list = [
-  { name: 'Иван', last_name: 'Иванов'},
-  { name: 'Петр', last_name: 'Иванов'},
-  { name: 'Олег', last_name: 'Иванов'},
-  { name: 'Кирилл', last_name: 'Иванов'},
-  { name: 'Кирилл', last_name: 'Иванов'},
-  { name: 'Кирилл', last_name: 'Иванов'},
-  { name: 'Кирилл', last_name: 'Иванов'},
-  { name: 'Кирилл', last_name: 'Иванов'}
-]
-
-map.innerHTML = render(); // Handlebars.compile

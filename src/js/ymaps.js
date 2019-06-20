@@ -4,8 +4,8 @@ function mapInit() {
     console.log("111");
 
     let map = new ymaps.Map("map", {
-      center: [55.76, 37.48], // Moscow
-      zoom: 7
+      center: [55.73367, 37.587874], // Moscow
+      zoom: 10.2
     })
   })
 }
