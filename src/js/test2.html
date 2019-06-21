@@ -1,0 +1,219 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		
+	</style>
+</head>
+<body class="container">
+	<div id="pos" class="div">test</div>
+	<script>
+
+
+		window.addEventListener("click", e => {
+ 			var posx;
+   		 	var posy;
+    		if (!e) var e = window.event;
+    		if (e.pageX || e.pageY) {
+		        posx = e.pageX;
+		        posy = e.pageY;
+	        } else if (e.clientX || e.clientY) {
+		        posx = e.clientX;
+		        posy = e.clientY;
+    		}
+    		console.log(posx);
+ 			console.log(posy);
+ 			var div = document.getElementById("pos");
+ 			div.className = 'div';
+ 			div.style.left = posx;
+ 			div.style.top = posy;
+ 			div.style.display= 'block';
+ 			console.log(div);
+
+		});
+</script>
+	
+</body>
+</html> -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Aratti@py</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+ <style>
+ 		html *
+		{
+   			font-family: Arial;
+		}
+
+ 		.card {
+			background-color: white;
+			height: 530px;
+  			width: 380px;
+			border-radius: 5px; 
+			position: absolute;
+			border: 1px solid grey;
+			display: none;
+		}
+
+		h4 {
+			background-color: #f48c42;
+			padding: 8px 10px;
+			border-radius: 5px 5px 0 0;
+			white-space: nowrap;
+    		overflow: hidden;
+			text-overflow: ellipsis;
+			color: white;
+			transform: translateY(-22px);
+		}
+
+		.container {
+			padding: 8px 10px;
+		}
+
+		.com-box {
+			height: 200px;
+  			width: 350px;
+  			padding: 8px 10px;
+			overflow: auto;
+			transform: translateY(-40px);
+		}
+
+		.button {
+			background-color: #f48c42;
+			border: none;
+			border-radius: 5px;
+			color: white;
+			padding: 8px 12px;
+			text-align: center;
+			text-decoration: none;
+			outline:none;
+			display: inline-block;
+			font-size: 16px;
+		}
+
+		.button:active {
+			outline:none;
+			border: none;
+            transform: translateY(1px);
+        }
+
+        input {
+  			height: 30px;
+  			width: 360px;
+  			margin-bottom: 5px;
+  			padding: 8px 10px;
+  			border: 1px solid grey;
+  			border-radius: 10px;
+			overflow: auto;
+			outline: none;
+			transform: translateY(-50px);
+		}
+
+		textarea {
+			resize: none;
+			width: 360px;
+			height: 100px;
+			border-radius: 10px;
+			padding: 8px 10px;
+			outline:none;
+			transform: translateY(-50px)
+		}
+
+		/* width */
+		::-webkit-scrollbar {
+ 			width: 10px;
+		}
+
+		/* Track */
+		::-webkit-scrollbar-track {
+		  	background: #f1f1f1; 
+		}
+ 
+		/* Handle */
+		::-webkit-scrollbar-thumb {
+		  	background: #888; 
+		}
+
+		/* Handle on hover */
+		::-webkit-scrollbar-thumb:hover {
+		  	background: #555; 
+		}
+	</style>
+
+ 
+</head>
+ 
+<body onClick="checkS(event)">
+ 	<div id="pos" class="card">
+  		<h4 id="header">Adress, adress, adress, sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</h4>
+  		<div class="container">
+	  		<div id="com-box" class="com-box">
+	  			
+	  		</div>
+	  		<h3 style="transform: translateY(-40px); color: #f48c42">ВАШ ОТЗЫВ</h3>
+	    	<input id="name" type="text" name="name" placeholder="Введите имя">
+	    	<input id="lastName" type="text" name="place" placeholder="Введите название места">
+	    	<textarea id="comment" type="text" name="comment" placeholder="Оставьте свой коментарий"></textarea>
+    		<div align="right" style="transform: translateY(-45px);">
+    			<button id="addButton" class="button">Добавить</button>
+    		</div>
+    	</div>
+    </div>
+
+    <script id="entry-template" type="text/x-handlebars-template">  
+		{{#each list}}
+		<div id="friends">
+				<p>{{name}} {{lastName}}</p>
+				<p>{{comment}}</p>
+		</div>				
+		{{/each}}
+	</script>
+	
+	<script>
+		const data = {
+			list: []
+		};
+ 
+		function checkS(e){
+   			console.log(e.target.attributes );
+    		if (e.target.localName === "body") {
+
+    			var source = document.getElementById("entry-template").innerHTML; //определяем шаблон как переменную
+				var template = Handlebars.compile(source);  //компилируем шаблон
+				var html = template(data);
+				const comBox = document.querySelector('#com-box')
+				comBox.innerHTML = html;
+    	
+				document.getElementById('pos').style.left = e.clientX;
+				document.getElementById('pos').style.top = e.clientY;
+				document.getElementById('pos').style.display='block';
+			
+			}
+		}
+
+		var but = document.querySelector('#addButton');
+
+		but.addEventListener('click', e => {
+			var header = document.querySelector('#header')
+			var name = document.querySelector('#name')
+			console.log(name);
+			var lastName = document.querySelector('#lastName')
+			console.log(lastName);
+			var comment  = document.querySelector('#comment')
+			console.log(comment);
+			var obj = {};
+			obj.header = "Adreeeeeeeeeeeeeeeeees";
+			obj.name = name.value;
+			obj.lastName = lastName.value;
+			obj.comment = comment.value;
+			name.value = '';
+			lastName.value = '';
+			comment.value = '';
+			data.list.push(obj);
+			console.log(data.list);
+		});
+
+</script>
+</html>
