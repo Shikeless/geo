@@ -57,6 +57,10 @@
 			display: none;
 		}
 
+		h3 {
+			transform: translateY(-40px); color: #f48c42
+		}
+
 		h4 {
 			background-color: #f48c42;
 			padding: 8px 10px;
@@ -114,7 +118,7 @@
 		textarea {
 			resize: none;
 			width: 360px;
-			height: 100px;
+			height: 120px;
 			border-radius: 10px;
 			padding: 8px 10px;
 			outline:none;
@@ -140,37 +144,104 @@
 		::-webkit-scrollbar-thumb:hover {
 		  	background: #555; 
 		}
+
+		.place {
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
 	</style>
 
  
 </head>
  
-<body onClick="checkS(event)">
- 	<div id="pos" class="card">
-  		<h4 id="header">Adress, adress, adress, sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</h4>
+<body id="pa" onClick="checkS(event)">
+
+
+ 	<!-- <div id="pos" class="card">
+  		<h4 id="header"></h4>
   		<div class="container">
-	  		<div id="com-box" class="com-box">
-	  			
+	  		<div id="com-box" class="com-box">			
 	  		</div>
-	  		<h3 style="transform: translateY(-40px); color: #f48c42">ВАШ ОТЗЫВ</h3>
+	  		<h3>ВАШ ОТЗЫВ</h3>
 	    	<input id="name" type="text" name="name" placeholder="Введите имя">
-	    	<input id="lastName" type="text" name="place" placeholder="Введите название места">
+	    	<input id="place" type="text" name="place" placeholder="Введите название места">
 	    	<textarea id="comment" type="text" name="comment" placeholder="Оставьте свой коментарий"></textarea>
     		<div align="right" style="transform: translateY(-45px);">
     			<button id="addButton" class="button">Добавить</button>
     		</div>
     	</div>
-    </div>
+    </div> -->
 
     <script id="entry-template" type="text/x-handlebars-template">  
 		{{#each list}}
 		<div id="friends">
-				<p>{{name}} {{lastName}}</br>{{comment}}</p>
+			<p><b>{{name}}</b> <span class="place">{{place}}</span> {{timestamp}}</br>{{comment}}</p>
 		</div>				
 		{{/each}}
 	</script>
 	
 	<script>
+		var body = document.querySelector("#pa")
+		function creating() {
+			var pos = document.createElement('div')
+			pos.id = "pos";
+			pos.classList = "card"
+			console.log(pos)
+			var h4 = document.createElement('h4')
+			h4.id = "header";
+			var container = document.createElement('div')
+			container.classList = "container";
+			var comBox = document.createElement('div');
+			comBox.id = "com-box";
+			comBox.classList = "com-box";
+			var h3 = document.createElement('h3');
+			h3.innerHTML = "ВАШ ОТЗЫВ"
+			var nameInput = document.createElement('input');
+			nameInput.id = "name";
+			nameInput.type = "text";
+			nameInput.name= "name";
+			nameInput.placeholder = "Введите имя";
+			var placeInput = document.createElement('input');
+			placeInput.id = "place";
+			placeInput.type = "text";
+			placeInput.name= "place";
+			placeInput.placeholder = "Введите название места";
+			var comment = document.createElement('textarea');
+			comment.id = "comment";
+			comment.type = "text";
+			comment.name= "comment";
+			comment.placeholder = "Оставьте свой коментарий";
+			console.log(nameInput);
+			var addDiv = document.createElement('div');
+			addDiv.align = "right";
+			addDiv.style = "transform: translateY(-45px);"
+			console.log(addDiv);
+			var but = document.createElement('button');
+			but.id = "addButton";
+			but.classList = "button";
+			but.textContent = "Добавить"
+			pos.appendChild(h4);
+			pos.appendChild(container);
+			container.appendChild(comBox);
+			container.appendChild(h3);
+			container.appendChild(nameInput);
+			container.appendChild(placeInput);
+			container.appendChild(comment);
+			container.appendChild(addDiv);
+			addDiv.appendChild(but);
+			pa.appendChild(pos);
+
+
+		}
+		creating();
+
+
+
+
+
+
+
+
 		const data = {
 			list: []
 		};
@@ -188,8 +259,20 @@
 				document.getElementById('pos').style.left = e.clientX;
 				document.getElementById('pos').style.top = e.clientY;
 				document.getElementById('pos').style.display='block';
+				console.log(document.getElementById('pos').style);
 			
 			}
+		}
+
+
+		function GetFormattedDate() {
+		    var todayTime = new Date();
+		    var month = todayTime .getMonth() + 1;
+		    var day = todayTime .getDate();
+		    var year = todayTime .getFullYear();
+		    var hour = todayTime .getHours();
+		    var minute = todayTime .getMinutes();
+		    return year + "/" + month + "/" + day + "-" + hour + "." + minute;
 		}
 
 		var but = document.querySelector('#addButton');
@@ -198,17 +281,18 @@
 			var header = document.querySelector('#header')
 			var name = document.querySelector('#name')
 			console.log(name);
-			var lastName = document.querySelector('#lastName')
-			console.log(lastName);
+			var place = document.querySelector('#place')
+			console.log(place);
 			var comment  = document.querySelector('#comment')
 			console.log(comment);
 			var obj = {};
 			obj.header = "Adreeeeeeeeeeeeeeeeees";
 			obj.name = name.value;
-			obj.lastName = lastName.value;
+			obj.place = place.value;
 			obj.comment = comment.value;
+			obj.timestamp = GetFormattedDate();
 			name.value = '';
-			lastName.value = '';
+			place.value = '';
 			comment.value = '';
 			data.list.push(obj);
 			console.log(data.list);

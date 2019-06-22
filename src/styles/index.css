@@ -1,22 +1,43 @@
-        .card {
-			  /* Add shadows to create the "card" effect */
-			  background-color: white;
-			  height: 530px;
-  			  width: 380px;
-			  border-radius: 5px; /* 5px rounded corners */
+		html *
+		{
+   			font-family: Arial;
 		}
-		.container {
-				  padding: 0 4px 0 4px;
-				}
+
+ 		.card {
+			background-color: white;
+			height: 530px;
+  			width: 380px;
+			border-radius: 5px; 
+			position: absolute;
+			border: 1px solid grey;
+			display: none;
+		}
+
 		h4 {
 			background-color: #f48c42;
 			padding: 8px 10px;
 			border-radius: 5px 5px 0 0;
+			white-space: nowrap;
+    		overflow: hidden;
+			text-overflow: ellipsis;
 			color: white;
+			transform: translateY(-22px);
+		}
+
+		.container {
+			padding: 8px 10px;
+		}
+
+		.com-box {
+			height: 200px;
+  			width: 350px;
+  			padding: 8px 10px;
+			overflow: auto;
+			transform: translateY(-40px);
 		}
 
 		.button {
-			background-color: #f48c42; /* Green */
+			background-color: #f48c42;
 			border: none;
 			border-radius: 5px;
 			color: white;
@@ -35,26 +56,43 @@
         }
 
         input {
-  			width: 99%;
-  			;
-		}
-
-		.addButton {
-			position: fixed;
-			margin-top: 227px;
-			margin-right: 5px; 
-			float: right;
-
+  			height: 30px;
+  			width: 360px;
+  			margin-bottom: 5px;
+  			padding: 8px 10px;
+  			border: 1px solid grey;
+  			border-radius: 10px;
+			overflow: auto;
+			outline: none;
+			transform: translateY(-50px);
 		}
 
 		textarea {
 			resize: none;
-			width: 350px;
+			width: 360px;
+			height: 100px;
 			border-radius: 10px;
 			padding: 8px 10px;
 			outline:none;
+			transform: translateY(-50px)
 		}
 
-		.my-layout {
-			color: green;
+		/* width */
+		::-webkit-scrollbar {
+ 			width: 10px;
+		}
+
+		/* Track */
+		::-webkit-scrollbar-track {
+		  	background: #f1f1f1; 
+		}
+ 
+		/* Handle */
+		::-webkit-scrollbar-thumb {
+		  	background: #888; 
+		}
+
+		/* Handle on hover */
+		::-webkit-scrollbar-thumb:hover {
+		  	background: #555; 
 		}
