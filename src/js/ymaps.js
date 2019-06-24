@@ -17,20 +17,17 @@ function mapInit() {
     
         map.events.add('click', function (e) {
             var coords = e.get('coords');
-            console.log(coords);
 
             var mouseX = e.get('domEvent').get('pageX');
 
             var mouseY = e.get('domEvent').get('pageY');
-            console.log(mouseY);
 
             let geoCoords = ymaps.geocode(coords);
 
             geoCoords
                 .then(code => {
                     let obj = {};
-                    console.log(obj);
-
+    
                     obj.adress = code.geoObjects.get(0).properties.get('text');
 
                     obj.comments = {
@@ -40,16 +37,10 @@ function mapInit() {
                     obj.coords = coords;
 
                     popup(mouseX, mouseY, obj.coords, obj.adress, obj.comments);
-                });
-
-            
+                });   
         });
 
         function popup(x, y, coords, geo, comms) {
-            console.log(geo);
-            console.log(coords);
-            console.log(geo);
-
             var header = document.getElementById('header');
 
             header.innerHTML = geo;
@@ -89,27 +80,21 @@ function mapInit() {
 
                 map.geoObjects.add(myPlacemark);
             });
-
-
         }
     });
 
 
 }
 
-
-
-
-  function createPlacemark(coords, data) {
-            return new ymaps.Placemark(coords, {
-                hintContent: data
-            }, {
-                preset: 'islands#violetDotIconWithCaption',
-                draggable: false,
-                openHintOnHover: false
-            });
-        }
-
+function createPlacemark(coords, data) {
+    return new ymaps.Placemark(coords, {
+        hintContent: data
+    }, {
+        preset: 'islands#violetDotIconWithCaption',
+        draggable: false,
+        openHintOnHover: false
+    });
+}
 
 export {
   mapInit
