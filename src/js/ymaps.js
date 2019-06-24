@@ -76,24 +76,22 @@ function mapInit() {
 
                 comms.list.push(comm);
 
-                var myPlacemark = createPlacemark(coords, comms); 
-
-                map.geoObjects.add(myPlacemark);
+                createPlacemark(map, coords, comms); 
             });
         }
     });
-
-
 }
 
-function createPlacemark(coords, data) {
-    return new ymaps.Placemark(coords, {
+function createPlacemark(map ,coords, data) {
+    var myPlacemark = new ymaps.Placemark(coords, {
         hintContent: data
     }, {
         preset: 'islands#violetDotIconWithCaption',
         draggable: false,
         openHintOnHover: false
     });
+
+    map.geoObjects.add(myPlacemark);
 }
 
 export {
