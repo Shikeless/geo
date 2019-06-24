@@ -36,49 +36,49 @@ function mapInit() {
 
                     obj.coords = coords;
 
-                    popup(mouseX, mouseY, obj.coords, obj.adress, obj.comments);
+                    popup(map, mouseX, mouseY, obj.coords, obj.adress, obj.comments);
                 });   
         });
+    });
+}
 
-        function popup(x, y, coords, geo, comms) {
-            var header = document.getElementById('header');
+function popup(map ,x, y, coords, geo, comms) {
+    var header = document.getElementById('header');
 
-            header.innerHTML = geo;
+    header.innerHTML = geo;
 
-            document.getElementById('pos').style.left = `${x}px`;
+    document.getElementById('pos').style.left = `${x}px`;
 
-            document.getElementById('pos').style.top = `${y}px`;
+    document.getElementById('pos').style.top = `${y}px`;
 
-            document.getElementById('pos').style.display='block';
+    document.getElementById('pos').style.display='block';
 
-            but.addEventListener('click', e => {
-                var comm = {};
+    but.addEventListener('click', e => {
+        var comm = {};
 
-                var name = document.querySelector('#name');
+        var name = document.querySelector('#name');
 
-                var place = document.querySelector('#place');
+        var place = document.querySelector('#place');
 
-                var comment  = document.querySelector('#comment');
+        var comment  = document.querySelector('#comment');
 
-                comm.name = name.value;
+        comm.name = name.value;
 
-                comm.place = place.value;
+        comm.place = place.value;
 
-                comm.comment = comment.value;
+        comm.comment = comment.value;
 
-                comm.timestamp = date;
+        comm.timestamp = date;
 
-                name.value = '';
+        name.value = '';
 
-                place.value = '';
+        place.value = '';
 
-                comment.value = '';
+        comment.value = '';
 
-                comms.list.push(comm);
+        comms.list.push(comm);
 
-                createPlacemark(map, coords, comms); 
-            });
-        }
+        createPlacemark(map, coords, comms); 
     });
 }
 
