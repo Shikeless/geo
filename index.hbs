@@ -3,20 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
   <link href="./src/styles/index.css" rel="stylesheet" type="text/css"></link>
   <title>{{htmlWebpackPlugin.options.title}}</title>
 </head>
 <body id="pa">
-  <div class="container">
+  <div>
     {{> "./src/templates/geo-content.hbs"}}
   </div>
 
+  <div id="pos" class="card">
+    {{> "./src/templates/popup.hbs"}}
+  </div>
+
 <script id="entry-template" type="text/x-handlebars-template">  
-		{{#each list}}
-		<div id="friends">
-			<p><b>{{name}}</b> <span class="place">{{place}}</span> {{timestamp}}</br>{{comment}}</p>
-		</div>				
-		{{/each}}
+	{{#each list}}
+  	<div id="friends">
+  		<p><b>{{name}}</b> <span class="place">{{place}}</span> {{timestamp}}</br>{{comment}}</p>
+  	</div>				
+	{{/each}}
 </script>
 
 </body>

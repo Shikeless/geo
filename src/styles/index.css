@@ -24,12 +24,16 @@
 			transform: translateY(-22px);
 		}
 
+		h3 {
+			transform: translateY(-40px); color: #f48c42
+		}
+
 		.container {
-			padding: 8px 10px;
+			padding: 6px 10px;
 		}
 
 		.com-box {
-			height: 200px;
+			height: 160px;
   			width: 350px;
   			padding: 8px 10px;
 			overflow: auto;
@@ -56,8 +60,8 @@
         }
 
         input {
-  			height: 30px;
-  			width: 360px;
+  			height: 20px;
+  			width: 338px;
   			margin-bottom: 5px;
   			padding: 8px 10px;
   			border: 1px solid grey;
@@ -69,8 +73,18 @@
 
 		textarea {
 			resize: none;
+			width: 338px;
+			height: 108px;
+			border-radius: 10px;
+			padding: 8px 10px;
+			outline:none;
+			transform: translateY(-50px)
+		}
+
+			.comment {
+			resize: none;
 			width: 360px;
-			height: 100px;
+			height: 120px;
 			border-radius: 10px;
 			padding: 8px 10px;
 			outline:none;

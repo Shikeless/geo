@@ -157,7 +157,7 @@
 <body id="pa" onClick="checkS(event)">
 
 
- 	<!-- <div id="pos" class="card">
+ 	<div id="pos" class="card">
   		<h4 id="header"></h4>
   		<div class="container">
 	  		<div id="com-box" class="com-box">			
@@ -170,7 +170,7 @@
     			<button id="addButton" class="button">Добавить</button>
     		</div>
     	</div>
-    </div> -->
+    </div>
 
     <script id="entry-template" type="text/x-handlebars-template">  
 		{{#each list}}
@@ -186,7 +186,6 @@
 			var pos = document.createElement('div')
 			pos.id = "pos";
 			pos.classList = "card"
-			console.log(pos)
 			var h4 = document.createElement('h4')
 			h4.id = "header";
 			var container = document.createElement('div')
@@ -211,11 +210,9 @@
 			comment.type = "text";
 			comment.name= "comment";
 			comment.placeholder = "Оставьте свой коментарий";
-			console.log(nameInput);
 			var addDiv = document.createElement('div');
 			addDiv.align = "right";
 			addDiv.style = "transform: translateY(-45px);"
-			console.log(addDiv);
 			var but = document.createElement('button');
 			but.id = "addButton";
 			but.classList = "button";
@@ -247,23 +244,21 @@
 		};
  
 		function checkS(e){
-   			console.log(e.target.attributes );
     		if (e.target.localName === "body") {
 
     			var source = document.getElementById("entry-template").innerHTML; //определяем шаблон как переменную
+    			console.log(source);
 				var template = Handlebars.compile(source);  //компилируем шаблон
 				var html = template(data);
+				console.log(html);
 				const comBox = document.querySelector('#com-box')
 				comBox.innerHTML = html;
     	
 				document.getElementById('pos').style.left = e.clientX;
 				document.getElementById('pos').style.top = e.clientY;
 				document.getElementById('pos').style.display='block';
-				console.log(document.getElementById('pos').style);
-			
 			}
 		}
-
 
 		function GetFormattedDate() {
 		    var todayTime = new Date();
