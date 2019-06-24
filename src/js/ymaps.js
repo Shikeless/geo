@@ -1,4 +1,4 @@
-import render from "/home/shikeless/Projects/LOFTSCHOOL/geo/src/templates/comment.hbs"
+import render from "../templates/comment.hbs"
 import { getData } from './date';
 
 var but = document.querySelector('#addButton');
