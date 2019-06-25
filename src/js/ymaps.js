@@ -57,7 +57,7 @@ function popup(map ,x, y, coords, geo, comms) {
 
     var but = document.querySelector('#addButton');
     
-    but.addEventListener('click', addComment(map, coords, comms));
+    addComment(map, coords, comms);
 }
 
 function createPlacemark(map ,coords, data) {
@@ -68,38 +68,40 @@ function createPlacemark(map ,coords, data) {
         draggable: false,
         openHintOnHover: false
     });
-    
+
     map.geoObjects.add(myPlacemark);
 }
 
 function addComment(map, coords, comms) {
-    var comm = {};
+    but.addEventListener('click', e => {
+        var comm = {};
 
-    var cord = coords;
+        var cord = coords;
 
-    var name = document.querySelector('#name');
+        var name = document.querySelector('#name');
 
-    var place = document.querySelector('#place');
+        var place = document.querySelector('#place');
 
-    var comment  = document.querySelector('#comment');
+        var comment  = document.querySelector('#comment');
 
-    comm.name = name.value;
+        comm.name = name.value;
 
-    comm.place = place.value;
+        comm.place = place.value;
 
-    comm.comment = comment.value;
+        comm.comment = comment.value;
 
-    comm.timestamp = date;
+        comm.timestamp = date;
 
-    name.value = '';
+        name.value = '';
 
-    place.value = '';
+        place.value = '';
 
-    comment.value = '';
+        comment.value = '';
 
-    comms.list.push(comm);
+        comms.list.push(comm);
 
-    createPlacemark(map, cord, comms); 
+        createPlacemark(map, cord, comms); 
+    });
 }
 
 export {
