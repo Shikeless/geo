@@ -56,34 +56,8 @@ function popup(map ,x, y, coords, geo, comms) {
     document.getElementById('pos').style.display='block';
 
     var but = document.querySelector('#addButton');
-
-    but.addEventListener('click', e => {
-        var comm = {};
-
-        var name = document.querySelector('#name');
-
-        var place = document.querySelector('#place');
-
-        var comment  = document.querySelector('#comment');
-
-        comm.name = name.value;
-
-        comm.place = place.value;
-
-        comm.comment = comment.value;
-
-        comm.timestamp = date;
-
-        name.value = '';
-
-        place.value = '';
-
-        comment.value = '';
-
-        comms.list.push(comm);
-
-        createPlacemark(map, coords, comms); 
-    });
+    
+    but.addEventListener('click', addComment(map, coords, comms));
 }
 
 function createPlacemark(map ,coords, data) {
@@ -94,8 +68,38 @@ function createPlacemark(map ,coords, data) {
         draggable: false,
         openHintOnHover: false
     });
-
+    
     map.geoObjects.add(myPlacemark);
+}
+
+function addComment(map, coords, comms) {
+    var comm = {};
+
+    var cord = coords;
+
+    var name = document.querySelector('#name');
+
+    var place = document.querySelector('#place');
+
+    var comment  = document.querySelector('#comment');
+
+    comm.name = name.value;
+
+    comm.place = place.value;
+
+    comm.comment = comment.value;
+
+    comm.timestamp = date;
+
+    name.value = '';
+
+    place.value = '';
+
+    comment.value = '';
+
+    comms.list.push(comm);
+
+    createPlacemark(map, cord, comms); 
 }
 
 export {
