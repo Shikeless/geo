@@ -1,15 +1,13 @@
 import render from "../templates/comment.hbs"
 import { getData } from './date';
 
-var but = document.querySelector('#addButton');
-
 var date = getData();
 
 function mapInit() {
 
     ymaps.ready(() => {
 
-        let map = new ymaps.Map("map", {
+        var map = new ymaps.Map("map", {
           center: [55.73367, 37.587874],
           zoom: 10.2,
           propagateEvents: true
@@ -26,9 +24,13 @@ function mapInit() {
 
             geoCoords
                 .then(code => {
+                    var code = 123;
+                    console.log(code);
+
                     let obj = {};
+                    console.log(obj);
     
-                    obj.adress = code.geoObjects.get(0).properties.get('text');
+                    obj.adress = code;
 
                     obj.comments = {
                         list:[]
@@ -52,6 +54,8 @@ function popup(map ,x, y, coords, geo, comms) {
     document.getElementById('pos').style.top = `${y}px`;
 
     document.getElementById('pos').style.display='block';
+
+    var but = document.querySelector('#addButton');
 
     but.addEventListener('click', e => {
         var comm = {};
