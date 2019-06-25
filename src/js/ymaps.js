@@ -54,8 +54,6 @@ function popup(map ,x, y, coords, geo, comms) {
     document.getElementById('pos').style.top = `${y}px`;
 
     document.getElementById('pos').style.display='block';
-
-    var but = document.querySelector('#addButton');
     
     addComment(map, coords, comms);
 }
@@ -73,8 +71,11 @@ function createPlacemark(map ,coords, data) {
 }
 
 function addComment(map, coords, comms) {
+    var but = document.querySelector('#addButton');
+
     but.addEventListener('click', e => {
         var comm = {};
+        console.log('click');
 
         var cord = coords;
 
