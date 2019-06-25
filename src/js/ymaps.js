@@ -24,13 +24,9 @@ function mapInit() {
 
             geoCoords
                 .then(code => {
-                    var code = 123;
-                    console.log(code);
-
                     let obj = {};
-                    console.log(obj);
     
-                    obj.adress = code;
+                    obj.adress = code.geoObjects.get(0).properties.get('text');;
 
                     obj.comments = {
                         list:[]
@@ -38,16 +34,16 @@ function mapInit() {
 
                     obj.coords = coords;
 
-                    popup(map, mouseX, mouseY, obj.coords, obj.adress, obj.comments);
+                    popup(map, mouseX, mouseY, obj);
                 });   
         });
     });
 }
 
-function popup(map ,x, y, coords, geo, comms) {
+function popup(map ,x, y, obj) {
     var header = document.getElementById('header');
 
-    header.innerHTML = geo;
+    header.innerHTML = obj.adress;
 
     document.getElementById('pos').style.left = `${x}px`;
 
@@ -55,12 +51,12 @@ function popup(map ,x, y, coords, geo, comms) {
 
     document.getElementById('pos').style.display='block';
     
-    addComment(map, coords, comms);
+    addComment(map, obj);
 }
 
-function createPlacemark(map ,coords, data) {
-    var myPlacemark = new ymaps.Placemark(coords, {
-        hintContent: data
+function createPlacemark(map ,obj) {
+    var myPlacemark = new ymaps.Placemark(obj.coords, {
+        hintContent: obj.comments
     }, {
         preset: 'islands#violetDotIconWithCaption',
         draggable: false,
@@ -70,14 +66,14 @@ function createPlacemark(map ,coords, data) {
     map.geoObjects.add(myPlacemark);
 }
 
-function addComment(map, coords, comms) {
+function addComment(map, obj) {
     var but = document.querySelector('#addButton');
 
     but.addEventListener('click', e => {
         var comm = {};
         console.log('click');
 
-        var cord = coords;
+        var cord = obj.coords;
 
         var name = document.querySelector('#name');
 
@@ -99,9 +95,9 @@ function addComment(map, coords, comms) {
 
         comment.value = '';
 
-        comms.list.push(comm);
+        obj.comments.list.push(comm);
 
-        createPlacemark(map, cord, comms); 
+        createPlacemark(map, obj); 
     });
 }
 
