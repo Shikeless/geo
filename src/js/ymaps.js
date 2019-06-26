@@ -70,18 +70,24 @@ function popup(map ,x, y, obj, clusterer) {
     var header = document.getElementById('header');
 
     header.innerHTML = obj.adress;
+    console.log('pop.offsetWidth'+ pop.offsetWidth);
+    console.log('pop.offsetHeight'+ pop.offsetHeight);
 
     if (x + pop.offsetWidth > window.innerWidth) {
         pop.style.left = `${window.innerWidth - pop.offsetWidth - 20}px`;
+    } else if (pop.offsetWidth === 0) {
+        pop.style.left = `${window.innerWidth - 402}px`;
     } else {
         pop.style.left = `${x}px`;
-    }
+    } 
 
     if (y + pop.offsetHeight > window.innerHeight) {
         pop.style.top = `${window.innerHeight - pop.offsetHeight - 20}px`;
+    } else if (pop.offsetHeight === 0) {
+        pop.style.top = `${window.innerHeight - 552}px`;
     } else {
         pop.style.top = `${y}px`;
-    }
+    } 
 
     pop.style.display = 'block';
 
