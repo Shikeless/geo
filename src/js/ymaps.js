@@ -2,6 +2,7 @@ import render from "../templates/comment.hbs"
 import render1 from "../templates/popup.hbs"
 // import render2 from "../templates/cluster.hbs"
 import { getData } from './date';
+import { sizeCalc } from './sizeCalc';
 
 var date = getData();
 
@@ -19,7 +20,7 @@ function mapInit() {
 
         var customItemContentLayout = ymaps.templateLayoutFactory.createClass(
             '<h2 class=ballon_header>{{ properties.balloonContentHeader }}</h2>' +
-            '<div id="ref" class=ballon_body><a>{{ properties.balloonContentBody[0] | raw}}</a></br>{{ properties.balloonContentBody[1] | raw}}</div>' +
+            '<div id="ref" class=ballon_body><a>{{ properties.balloonContentBody[0] | raw}}</a></br>{{ properties.balloonContentBody[0] | raw}}</div>' +
             '<div class=ballon_footer>{{ properties.balloonContentFooter | raw}}</div>'
         );
 
@@ -70,11 +71,19 @@ function popup(map ,x, y, obj, clusterer) {
 
     header.innerHTML = obj.adress;
 
-    document.getElementById('pos').style.left = `${x}px`;
+    if (x + pop.offsetWidth > window.innerWidth) {
+        pop.style.left = `${window.innerWidth - pop.offsetWidth - 20}px`;
+    } else {
+        pop.style.left = `${x}px`;
+    }
 
-    document.getElementById('pos').style.top = `${y}px`;
+    if (y + pop.offsetHeight > window.innerHeight) {
+        pop.style.top = `${window.innerHeight - pop.offsetHeight - 20}px`;
+    } else {
+        pop.style.top = `${y}px`;
+    }
 
-    document.getElementById('pos').style.display = 'block';
+    pop.style.display = 'block';
 
     const comBox = document.querySelector('#com-box');
 

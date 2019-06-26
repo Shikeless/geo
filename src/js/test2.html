@@ -245,18 +245,30 @@
  
 		function checkS(e){
     		if (e.target.localName === "body") {
+    			console.log(window.innerWidth);
+    			console.log(window.innerHeight);
 
     			var source = document.getElementById("entry-template").innerHTML; //определяем шаблон как переменную
-    			console.log(source);
+    			
 				var template = Handlebars.compile(source);  //компилируем шаблон
 				var html = template(data);
-				console.log(html);
 				const comBox = document.querySelector('#com-box')
-				comBox.innerHTML = html;
-    	
-				document.getElementById('pos').style.left = e.clientX;
-				document.getElementById('pos').style.top = e.clientY;
+				
+    			if (e.clientY + document.getElementById('pos').offsetHeight > window.innerHeight) {
+    				document.getElementById('pos').style.top = window.innerHeight - document.getElementById('pos').offsetHeight;
+    			} else {
+    				document.getElementById('pos').style.top = e.clientY
+    			}
+				
+				if (e.clientX + document.getElementById('pos').offsetWidth > window.innerWidth) {
+    				document.getElementById('pos').style.left = window.innerWidth - document.getElementById('pos').offsetWidth;
+    			} else {
+    				document.getElementById('pos').style.left = e.clientX;
+    			}
+				
+				
 				document.getElementById('pos').style.display='block';
+				comBox.innerHTML = `${window.innerWidth}, ${window.innerHeight}, ${document.getElementById('pos').offsetWidth}, ${document.getElementById('pos').offsetHeight}, ${window.innerHeight - document.getElementById('pos').offsetHeight}`;
 			}
 		}
 
@@ -275,11 +287,11 @@
 		but.addEventListener('click', e => {
 			var header = document.querySelector('#header')
 			var name = document.querySelector('#name')
-			console.log(name);
+
 			var place = document.querySelector('#place')
-			console.log(place);
+	
 			var comment  = document.querySelector('#comment')
-			console.log(comment);
+
 			var obj = {};
 			obj.header = "Adreeeeeeeeeeeeeeeeees";
 			obj.name = name.value;
@@ -290,7 +302,7 @@
 			place.value = '';
 			comment.value = '';
 			data.list.push(obj);
-			console.log(data.list);
+		
 		});
 
 </script>
