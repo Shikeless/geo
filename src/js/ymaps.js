@@ -9,9 +9,7 @@ var date = getData();
 var pop = document.getElementById('pos');
 
 function mapInit() {
-
     ymaps.ready(() => {
-
         var map = new ymaps.Map("map", {
           center: [55.73367, 37.587874],
           zoom: 10.2,
@@ -70,8 +68,6 @@ function popup(map ,x, y, obj, clusterer) {
     var header = document.getElementById('header');
 
     header.innerHTML = obj.adress;
-    console.log('pop.offsetWidth'+ pop.offsetWidth);
-    console.log('pop.offsetHeight'+ pop.offsetHeight);
 
     if (x + pop.offsetWidth > window.innerWidth) {
         pop.style.left = `${window.innerWidth - pop.offsetWidth - 20}px`;
@@ -97,8 +93,6 @@ function popup(map ,x, y, obj, clusterer) {
     
     addComment(map, x, y, obj, comBox, clusterer);
 }
-
-
 
 function createPlacemark(map, x, y, obj, clusterer) {
     var myPlacemark = new ymaps.Placemark(obj.coords, {
