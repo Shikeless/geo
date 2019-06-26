@@ -70,12 +70,16 @@ function popup(map ,x, y, obj, clusterer) {
 
     if (x + pop.offsetWidth > window.innerWidth) {
         pop.style.left = `${window.innerWidth - pop.offsetWidth - 20}px`;
+    } else if (window.innerWidth - x < 382) {
+        pop.style.left = `${window.innerWidth - 402}px`;
     } else {
         pop.style.left = `${x}px`;
     } 
 
     if (y + pop.offsetHeight > window.innerHeight) {
         pop.style.top = `${window.innerHeight - pop.offsetHeight - 20}px`;
+    } else if (window.innerHeight - y < 532) {
+        pop.style.top = `${window.innerHeight - 552}px`;
     } else {
         pop.style.top = `${y}px`;
     } 
