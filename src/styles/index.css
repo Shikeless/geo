@@ -15,17 +15,18 @@
 
 		h4 {
 			background-color: #f48c42;
+			color: white;
 			padding: 8px 10px;
 			border-radius: 5px 5px 0 0;
 			white-space: nowrap;
     		overflow: hidden;
 			text-overflow: ellipsis;
-			color: white;
 			transform: translateY(-22px);
 		}
 
 		h3 {
-			transform: translateY(-40px); color: #f48c42
+			transform: translateY(-40px);
+			color: #f48c42;
 		}
 
 		.container {
@@ -38,19 +39,21 @@
   			padding: 8px 10px;
 			overflow: auto;
 			transform: translateY(-40px);
+			word-wrap: break-word;
 		}
 
 		.button {
 			background-color: #f48c42;
 			border: none;
-			border-radius: 5px;
 			color: white;
+			border-radius: 5px;
 			padding: 8px 12px;
 			text-align: center;
 			text-decoration: none;
 			outline:none;
 			display: inline-block;
 			font-size: 16px;
+			transform: translateY(-5px);
 		}
 
 		.button:active {
@@ -81,7 +84,11 @@
 			transform: translateY(-50px)
 		}
 
-			.comment {
+		a {
+			color: blue;
+		}
+
+		.comment {
 			resize: none;
 			width: 360px;
 			height: 120px;
@@ -89,6 +96,22 @@
 			padding: 8px 10px;
 			outline:none;
 			transform: translateY(-50px)
+		}
+
+		.ballon_header {
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		.ballon_body {
+			word-wrap: break-word;
+		}
+
+		.ballon_footer {
+			position: absolute;
+			color: gray;
+			bottom: 0px;
+			right: 0px;
 		}
 
 		/* width */
