@@ -2,11 +2,12 @@ import render from "../templates/comment.hbs"
 import render1 from "../templates/popup.hbs"
 // import render2 from "../templates/cluster.hbs"
 import { getData } from './date';
-import { sizeCalc } from './sizeCalc';
 
 var date = getData();
 
 var pop = document.getElementById('pos');
+
+pop.innerHTML = render1();
 
 function mapInit() {
     ymaps.ready(() => {
@@ -63,24 +64,18 @@ function mapInit() {
 }
 
 function popup(map ,x, y, obj, clusterer) {
-    pop.innerHTML = render1();
-
     var header = document.getElementById('header');
 
     header.innerHTML = obj.adress;
 
     if (x + pop.offsetWidth > window.innerWidth) {
         pop.style.left = `${window.innerWidth - pop.offsetWidth - 20}px`;
-    } else if (pop.offsetWidth === 0) {
-        pop.style.left = `${window.innerWidth - 402}px`;
     } else {
         pop.style.left = `${x}px`;
     } 
 
     if (y + pop.offsetHeight > window.innerHeight) {
         pop.style.top = `${window.innerHeight - pop.offsetHeight - 20}px`;
-    } else if (pop.offsetHeight === 0) {
-        pop.style.top = `${window.innerHeight - 552}px`;
     } else {
         pop.style.top = `${y}px`;
     } 
