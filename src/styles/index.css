@@ -16,8 +16,9 @@
 		h4 {
 			background-color: #f48c42;
 			color: white;
+			width: 340px;
 			padding: 8px 10px;
-			border-radius: 5px 5px 0 0;
+			border-radius: 5px 0 0 0;
 			white-space: nowrap;
     		overflow: hidden;
 			text-overflow: ellipsis;
@@ -88,6 +89,12 @@
 			color: blue;
 		}
 
+		img {
+			background-color: #f48c42;
+			width: 40px;
+			padding: 8px 10px;
+			border-radius: 0 5px 0 0;
+		}
 		.comment {
 			resize: none;
 			width: 360px;
