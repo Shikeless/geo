@@ -7,6 +7,8 @@ var date = getData();
 
 var pop = document.getElementById('pop');
 
+var placemarks = [];
+
 function mapInit() {
 
     ymaps.ready(() => {
@@ -105,7 +107,7 @@ function popup(map, obj, clusterer) {
 
 function createPlacemark(map, obj, clusterer) {
     var myPlacemark = new ymaps.Placemark(obj.coords, {
-        hintContent: obj.comments,
+        hintContent: obj,
         balloonContentHeader: obj.comments.list[obj.comments.list.length - 1].place,
         balloonContentBody: [obj.adress, obj.comments.list[obj.comments.list.length - 1].comment],
         balloonContentFooter: obj.comments.list[obj.comments.list.length - 1].timestamp
@@ -116,21 +118,26 @@ function createPlacemark(map, obj, clusterer) {
         hasBalloon: false
     });
 
+    placemarks.push(myPlacemark);
+                                                     
     clusterer.add(myPlacemark);
 
     map.geoObjects.add(clusterer);
 
-    document.addEventListener('click', e => {
-        if (e.target.tagName === 'A') {
-            obj.x = e.pageX;
-            obj.y = e.pageY;
-            popup(map, obj, clusterer);
-        }
-    })
-
     clusterer.events.add('click', e => {
         pop.style = "display: none"
     })
+    
+    document.addEventListener('click', e => {
+        if (e.target.tagName === 'A') {
+            for (const element of placemarks) {
+                if (element.properties._data.hintContent.adress === e.target.innerHTML) {
+                    obj.comments = element.properties._data.hintContent.comments;
+                    popup(map, obj, clusterer);
+                }
+            }
+        }
+    });
 
     myPlacemark.events.add('click', e => {
         const marker = e.get('target');
@@ -139,7 +146,6 @@ function createPlacemark(map, obj, clusterer) {
        
         popup(map, obj, clusterer);
     });
-
 }
 
 function addComment(map, obj, comBox, clusterer) {
