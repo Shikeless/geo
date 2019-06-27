@@ -1,21 +1,21 @@
-html *  {
+html * {
 		font-family: Arial;
 }
 
-	.card {
+.card {
 	background-color: white;
 	height: 530px;
-		width: 380px;
+	width: 380px;
 	border-radius: 5px; 
 	position: absolute;
 	border: 1px solid grey;
-	display: block;
+	display: none;
 }
 
 h4 {
 	background-color: #f48c42;
 	color: white;
-	width: 330px;
+	width: 325px;
 	padding: 8px 10px;
 	border-radius: 5px 0 0 0;
 	white-space: nowrap;
@@ -24,8 +24,11 @@ h4 {
 	transform: translateY(-22px);
 }
 
-.head {
-	display: flex;
+#cross {
+	width: 35px;
+	height: 35px;
+	border-radius: 0 5px 0 0;
+	background-color: #f48c42;
 }
 
 h3 {
@@ -33,13 +36,17 @@ h3 {
 	color: #f48c42;
 }
 
+.head {
+	display: flex;
+}
+
 .container {
 	padding: 6px 10px;
 }
 
-#com-box {
+.com-box {
 	height: 160px;
-		width: 352px;
+		width: 350px;
 		padding: 8px 10px;
 	overflow: auto;
 	transform: translateY(-40px);
@@ -92,13 +99,6 @@ a {
 	color: blue;
 }
 
-#cross {
-	background-color: #f48c42;
-	height: 18px;
-	width: 18px;
-	padding: 8px 10px;
-	border-radius: 0 5px 0 0;
-}
 .comment {
 	resize: none;
 	width: 360px;
@@ -125,18 +125,22 @@ a {
 	right: 0px;
 }
 
+/* width */
 ::-webkit-scrollbar {
 		width: 10px;
 }
 
+/* Track */
 ::-webkit-scrollbar-track {
   	background: #f1f1f1; 
 }
 
+/* Handle */
 ::-webkit-scrollbar-thumb {
   	background: #888; 
 }
 
+/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   	background: #555; 
 }

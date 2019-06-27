@@ -1,15 +1,16 @@
 import render from "../templates/comment.hbs"
 import render1 from "../templates/popup.hbs"
+// import render2 from "../templates/cluster.hbs"
 import { getData } from './date';
 
 var date = getData();
 
 var pop = document.getElementById('pop');
 
-pop.innerHTML = render1();
-
 function mapInit() {
+
     ymaps.ready(() => {
+
         var map = new ymaps.Map("map", {
           center: [55.73367, 37.587874],
           zoom: 10.2,
@@ -18,7 +19,7 @@ function mapInit() {
 
         var customItemContentLayout = ymaps.templateLayoutFactory.createClass(
             '<h2 class=ballon_header>{{ properties.balloonContentHeader }}</h2>' +
-            '<div id="ref" class=ballon_body><a>{{ properties.balloonContentBody[0] | raw}}</a></br>{{ properties.balloonContentBody[0] | raw}}</div>' +
+            '<div id="ref" class=ballon_body><a>{{ properties.balloonContentBody[0] | raw}}</a></br>{{ properties.balloonContentBody[1] | raw}}</div>' +
             '<div class=ballon_footer>{{ properties.balloonContentFooter | raw}}</div>'
         );
 
@@ -31,8 +32,8 @@ function mapInit() {
             clusterBalloonPanelMaxMapArea: 0,
             clusterBalloonContentLayoutWidth: 300,
             clusterBalloonContentLayoutHeight: 200,
-            clusterBalloonPagerSize: 5
-         
+            clusterBalloonPagerSize: 5,
+            minClusterSize: 2     
         });
     
         map.events.add('click', function (e) {
@@ -54,33 +55,39 @@ function mapInit() {
                         list:[]
                     };
 
+                    obj.x = mouseX;
+
+                    obj.y = mouseY;
+
                     obj.coords = coords;
 
-                    popup(map, mouseX, mouseY, obj, clusterer);
+                    popup(map, obj, clusterer);
                 });  
         });
     });
 }
 
-function popup(map ,x, y, obj, clusterer) {
+function popup(map, obj, clusterer) {
+    pop.innerHTML = render1();
+
     var header = document.getElementById('header');
 
     header.innerHTML = obj.adress;
 
-    if (x + pop.offsetWidth > window.innerWidth) {
+    if (obj.x + pop.offsetWidth > window.innerWidth) {
         pop.style.left = `${window.innerWidth - pop.offsetWidth - 20}px`;
-    } else if (window.innerWidth - x < 382) {
+    } else if (window.innerWidth - obj.x < 382) {
         pop.style.left = `${window.innerWidth - 402}px`;
     } else {
-        pop.style.left = `${x}px`;
+        pop.style.left = `${obj.x}px`;
     } 
 
-    if (y + pop.offsetHeight > window.innerHeight) {
+    if (obj.y + pop.offsetHeight > window.innerHeight) {
         pop.style.top = `${window.innerHeight - pop.offsetHeight - 20}px`;
-    } else if (window.innerHeight - y < 532) {
+    } else if (window.innerHeight - obj.y < 532) {
         pop.style.top = `${window.innerHeight - 552}px`;
     } else {
-        pop.style.top = `${y}px`;
+        pop.style.top = `${obj.y}px`;
     } 
 
     pop.style.display = 'block';
@@ -89,12 +96,14 @@ function popup(map ,x, y, obj, clusterer) {
 
     comBox.innerHTML = render(obj.comments);
     
-    addComment(map, x, y, obj, comBox, clusterer);
+    addComment(map, obj, comBox, clusterer);
 
     closeButt();
 }
 
-function createPlacemark(map, x, y, obj, clusterer) {
+
+
+function createPlacemark(map, obj, clusterer) {
     var myPlacemark = new ymaps.Placemark(obj.coords, {
         hintContent: obj.comments,
         balloonContentHeader: obj.comments.list[obj.comments.list.length - 1].place,
@@ -113,9 +122,9 @@ function createPlacemark(map, x, y, obj, clusterer) {
 
     document.addEventListener('click', e => {
         if (e.target.tagName === 'A') {
-            var x = e.pageX;
-            var y = e.pageY;
-            popup(map, x, y, obj, clusterer);
+            obj.x = e.pageX;
+            obj.y = e.pageY;
+            popup(map, obj, clusterer);
         }
     })
 
@@ -128,12 +137,12 @@ function createPlacemark(map, x, y, obj, clusterer) {
 
         obj.comments = marker.properties._data.hintContent;
        
-        popup(map, x, y, obj, clusterer);
+        popup(map, obj, clusterer);
     });
 
 }
 
-function addComment(map, x, y, obj, comBox, clusterer) {
+function addComment(map, obj, comBox, clusterer) {
     var but = document.querySelector('#addButton');
 
     but.addEventListener('click', e => {
@@ -165,7 +174,7 @@ function addComment(map, x, y, obj, comBox, clusterer) {
 
         comBox.innerHTML = render(obj.comments);
 
-        createPlacemark(map, x, y, obj, clusterer);              
+        createPlacemark(map, obj, clusterer);              
     });
 }
 
