@@ -1,11 +1,10 @@
 import render from "../templates/comment.hbs"
 import render1 from "../templates/popup.hbs"
-// import render2 from "../templates/cluster.hbs"
 import { getData } from './date';
 
 var date = getData();
 
-var pop = document.getElementById('pos');
+var pop = document.getElementById('pop');
 
 pop.innerHTML = render1();
 
@@ -91,6 +90,8 @@ function popup(map ,x, y, obj, clusterer) {
     comBox.innerHTML = render(obj.comments);
     
     addComment(map, x, y, obj, comBox, clusterer);
+
+    closeButt();
 }
 
 function createPlacemark(map, x, y, obj, clusterer) {
@@ -166,6 +167,14 @@ function addComment(map, x, y, obj, comBox, clusterer) {
 
         createPlacemark(map, x, y, obj, clusterer);              
     });
+}
+
+function closeButt() {
+    var cross = document.querySelector('#cross');
+    cross.addEventListener('click', e => {
+        var pop = document.querySelector('#pop')
+        pop.style = "display: none";
+    })
 }
 
 export {
