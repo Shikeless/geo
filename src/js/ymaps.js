@@ -103,8 +103,6 @@ function popup(map, obj, clusterer) {
     closeButt();
 }
 
-
-
 function createPlacemark(map, obj, clusterer) {
     var myPlacemark = new ymaps.Placemark(obj.coords, {
         hintContent: obj,
@@ -127,24 +125,26 @@ function createPlacemark(map, obj, clusterer) {
     clusterer.events.add('click', e => {
         pop.style = "display: none"
     })
-    
-    document.addEventListener('click', e => {
-        if (e.target.tagName === 'A') {
-            for (const element of placemarks) {
-                if (element.properties._data.hintContent.adress === e.target.innerHTML) {
-                    obj.comments = element.properties._data.hintContent.comments;
-                    popup(map, obj, clusterer);
-                }
-            }
-        }
-    });
 
-    myPlacemark.events.add('click', e => {
+    map.geoObjects.events.add('click', e => {
         const marker = e.get('target');
+        if (marker.options._name === 'geoObject') {
+            let obj = marker.properties._data.hintContent;
 
-        obj.comments = marker.properties._data.hintContent;
-       
-        popup(map, obj, clusterer);
+            popup(map, obj, clusterer);
+        } else if (marker.options._name === 'cluster') {
+            document.addEventListener('click', e => {
+                if (e.target.tagName === 'A') {
+                    for (const element of placemarks) {
+                        if (element.properties._data.hintContent.adress === e.target.innerHTML) {
+                            let obj = element.properties._data.hintContent;
+
+                            popup(map, obj, clusterer);
+                        }
+                    }
+                }
+            });    
+        }
     });
 }
 
