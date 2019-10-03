@@ -1,6 +1,5 @@
-import render from "../templates/comment.hbs"
-import render1 from "../templates/popup.hbs"
-// import render2 from "../templates/cluster.hbs"
+import render from "../templates/comment.hbs";
+import render1 from "../templates/popup.hbs";
 import { getData } from './date';
 
 var date = getData();
@@ -14,9 +13,9 @@ function mapInit() {
     ymaps.ready(() => {
 
         var map = new ymaps.Map("map", {
-          center: [55.73367, 37.587874],
-          zoom: 10.2,
-          propagateEvents: true
+            center: [55.73367, 37.587874],
+            zoom: 10.2,
+            propagateEvents: true
         })
 
         var customItemContentLayout = ymaps.templateLayoutFactory.createClass(
@@ -126,26 +125,7 @@ function createPlacemark(map, obj, clusterer) {
         pop.style = "display: none"
     })
 
-    map.geoObjects.events.add('click', e => {
-        const marker = e.get('target');
-        if (marker.options._name === 'geoObject') {
-            let obj = marker.properties._data.hintContent;
-
-            popup(map, obj, clusterer);
-        } else if (marker.options._name === 'cluster') {
-            document.addEventListener('click', e => {
-                if (e.target.tagName === 'A') {
-                    for (const element of placemarks) {
-                        if (element.properties._data.hintContent.adress === e.target.innerHTML) {
-                            let obj = element.properties._data.hintContent;
-
-                            popup(map, obj, clusterer);
-                        }
-                    }
-                }
-            });    
-        }
-    });
+    findObject(map, clusterer);
 }
 
 function addComment(map, obj, comBox, clusterer) {
@@ -153,8 +133,6 @@ function addComment(map, obj, comBox, clusterer) {
 
     but.addEventListener('click', e => {
         var comm = {};
-
-        var cord = obj.coords;
 
         var name = document.querySelector('#name');
 
@@ -190,6 +168,29 @@ function closeButt() {
         var pop = document.querySelector('#pop')
         pop.style = "display: none";
     })
+}
+
+function findObject(map, clusterer) {
+    map.geoObjects.events.add('click', e => {
+        const marker = e.get('target');
+        if (marker.options._name === 'geoObject') {
+            let obj = marker.properties._data.hintContent;
+
+            popup(map, obj, clusterer);
+        } else if (marker.options._name === 'cluster') {
+            document.addEventListener('click', e => {
+                if (e.target.tagName === 'A') {
+                    for (const element of placemarks) {
+                        if (element.properties._data.hintContent.adress === e.target.innerHTML) {
+                            let obj = element.properties._data.hintContent;
+
+                            popup(map, obj, clusterer);
+                        }
+                    }
+                }
+            });    
+        }
+    });
 }
 
 export {
